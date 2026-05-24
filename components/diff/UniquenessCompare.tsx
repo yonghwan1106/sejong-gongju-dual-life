@@ -80,7 +80,7 @@ const assets = [
 
 export default function UniquenessCompare() {
   return (
-    <section className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
+    <section id="why" className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div

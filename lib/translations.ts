@@ -20,6 +20,18 @@ export const translations = {
     sectionIncentive: '인센티브 패키지',
     sectionRoadmap: '비전 2030',
     sectionFaq: '자주 묻는 질문',
+    sectionWhy: '차별성 분석',
+    sectionRoi: '투자 대비 효과',
+    sectionEvaluation: '공모 평가표 100점',
+    sectionKpi: 'KPI',
+
+    // ROI
+    roiTitle: 'ROI 21배 — 수식으로 검증',
+
+    // Nav anchors
+    navWhy: '왜 공주인가',
+    navCalculator: '비용 계산',
+    navPolicy: '정책 패키지',
 
     // Roadmap
     roadmapTitle: '비전 2030 — 공주 인구 10만 회복 시나리오',
@@ -69,6 +81,18 @@ export const translations = {
     sectionIncentive: 'Incentive Package',
     sectionRoadmap: 'Vision 2030',
     sectionFaq: 'FAQ',
+    sectionWhy: 'Why Gongju',
+    sectionRoi: 'ROI Analysis',
+    sectionEvaluation: 'Evaluation Criteria 100pts',
+    sectionKpi: 'KPI',
+
+    // ROI
+    roiTitle: 'ROI 21× — Verified by Formula',
+
+    // Nav anchors
+    navWhy: 'Why Gongju',
+    navCalculator: 'Cost Calculator',
+    navPolicy: 'Policy Package',
 
     // Roadmap
     roadmapTitle: 'Vision 2030 — Gongju Population 100K Recovery Scenario',

@@ -52,7 +52,7 @@ const policies = [
 
 export default function PolicyDeck() {
   return (
-    <section id="incentives" className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20">
+    <section id="policy" className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div

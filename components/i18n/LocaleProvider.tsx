@@ -20,13 +20,20 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('ko');
 
   useEffect(() => {
-    setLocaleState(getLocale());
+    const saved = getLocale();
+    setLocaleState(saved);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = saved;
+    }
   }, []);
 
   const toggleLocale = useCallback(() => {
     const next: Locale = locale === 'ko' ? 'en' : 'ko';
     setLocaleState(next);
     setLocale(next);
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = next;
+    }
   }, [locale]);
 
   const t = useCallback(

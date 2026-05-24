@@ -106,7 +106,7 @@ export default function HeroBlock() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => scrollTo('incentives')}
+            onClick={() => scrollTo('policy')}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-[#E2DDD6] text-[#1F1F1F] text-sm font-medium rounded-full hover:bg-[#F5F1EB] transition-colors"
           >
             {t('ctaPolicy')}

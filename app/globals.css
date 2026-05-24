@@ -161,3 +161,15 @@
   height: 1px;
   background: #E2DDD6;
 }
+
+/* WCAG 2.2.2 — prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { track } from '@vercel/analytics';
 import { Card, CardContent } from '@/components/ui/card';
@@ -16,6 +16,11 @@ export default function InterestForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState<number | null>(null);
+  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch('/api/interest')
@@ -24,10 +29,34 @@ export default function InterestForm() {
       .catch(() => {});
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Focus success message when submitted (WCAG 2.4.3)
+  useEffect(() => {
+    if (submitted && successRef.current) {
+      successRef.current.focus();
+    }
+  }, [submitted]);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email) return;
+
+    const newErrors: { name?: string; email?: string } = {};
+    if (!form.name.trim()) newErrors.name = '이름을 입력해 주세요.';
+    if (!form.email.trim()) {
+      newErrors.email = '이메일을 입력해 주세요.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      newErrors.email = '올바른 이메일 형식이 아닙니다.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      if (newErrors.name) nameRef.current?.focus();
+      else if (newErrors.email) emailRef.current?.focus();
+      return;
+    }
+
+    setErrors({});
     setLoading(true);
+
     try {
       const res = await fetch('/api/interest', {
         method: 'POST',
@@ -122,13 +151,17 @@ export default function InterestForm() {
                   {submitted ? (
                     <motion.div
                       key="success"
+                      ref={successRef}
+                      tabIndex={-1}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.4 }}
-                      className="text-center py-8"
+                      className="text-center py-8 focus-visible:outline-none"
+                      aria-live="polite"
+                      aria-atomic="true"
                     >
                       <CheckCircle className="w-12 h-12 text-[#2D5F5D] mx-auto mb-4" />
-                      <h3 className="text-lg font-bold text-[#1F1F1F] mb-2">
+                      <h3 className="text-lg font-bold text-[#1F1F1F] dark:text-[#F0F0F0] mb-2">
                         관심 등록 완료!
                       </h3>
                       <p className="text-sm text-[#555] leading-relaxed mb-1">
@@ -151,36 +184,84 @@ export default function InterestForm() {
                       className="space-y-5"
                       initial={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
+                      noValidate
                     >
+                      {/* Name field */}
                       <div>
-                        <Label htmlFor="name" className="text-sm font-semibold text-[#1F1F1F] mb-2 block">
-                          이름 <span className="text-[#C8553D]">*</span>
+                        <Label htmlFor="name" className="text-sm font-semibold text-[#1F1F1F] dark:text-[#F0F0F0] mb-2 block">
+                          이름 <span className="text-[#C8553D]" aria-hidden="true">*</span>
+                          <span className="sr-only">(필수)</span>
                         </Label>
                         <Input
+                          ref={nameRef}
                           id="name"
                           placeholder="홍길동"
                           value={form.name}
-                          onChange={(e) => setForm({ ...form, name: e.target.value })}
-                          required
-                          className="border-[#E2DDD6] bg-white focus-visible:ring-[#6B4423] focus-visible:border-[#6B4423]"
+                          onChange={(e) => {
+                            setForm({ ...form, name: e.target.value });
+                            if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+                          }}
+                          aria-describedby={errors.name ? 'name-error' : undefined}
+                          aria-invalid={!!errors.name}
+                          aria-required="true"
+                          className={`border-[#E2DDD6] bg-white focus-visible:ring-[#6B4423] focus-visible:border-[#6B4423] ${
+                            errors.name ? 'border-[#C8553D] focus-visible:ring-[#C8553D] focus-visible:border-[#C8553D]' : ''
+                          }`}
                         />
+                        {errors.name && (
+                          <p
+                            id="name-error"
+                            role="alert"
+                            className="text-xs text-[#C8553D] mt-1 flex items-center gap-1"
+                          >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            {errors.name}
+                          </p>
+                        )}
                       </div>
+
+                      {/* Email field */}
                       <div>
-                        <Label htmlFor="email" className="text-sm font-semibold text-[#1F1F1F] mb-2 block">
-                          이메일 <span className="text-[#C8553D]">*</span>
+                        <Label htmlFor="email" className="text-sm font-semibold text-[#1F1F1F] dark:text-[#F0F0F0] mb-2 block">
+                          이메일 <span className="text-[#C8553D]" aria-hidden="true">*</span>
+                          <span className="sr-only">(필수)</span>
                         </Label>
                         <Input
+                          ref={emailRef}
                           id="email"
                           type="email"
                           placeholder="name@example.com"
                           value={form.email}
-                          onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          required
-                          className="border-[#E2DDD6] bg-white focus-visible:ring-[#6B4423] focus-visible:border-[#6B4423]"
+                          onChange={(e) => {
+                            setForm({ ...form, email: e.target.value });
+                            if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+                          }}
+                          aria-describedby={errors.email ? 'email-error' : undefined}
+                          aria-invalid={!!errors.email}
+                          aria-required="true"
+                          className={`border-[#E2DDD6] bg-white focus-visible:ring-[#6B4423] focus-visible:border-[#6B4423] ${
+                            errors.email ? 'border-[#C8553D] focus-visible:ring-[#C8553D] focus-visible:border-[#C8553D]' : ''
+                          }`}
                         />
+                        {errors.email && (
+                          <p
+                            id="email-error"
+                            role="alert"
+                            className="text-xs text-[#C8553D] mt-1 flex items-center gap-1"
+                          >
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            {errors.email}
+                          </p>
+                        )}
                       </div>
+
+                      {/* Company field */}
                       <div>
-                        <Label htmlFor="company" className="text-sm font-semibold text-[#1F1F1F] mb-2 block">
+                        <Label htmlFor="company" className="text-sm font-semibold text-[#1F1F1F] dark:text-[#F0F0F0] mb-2 block">
                           세종 직장명 <span className="text-[#8A8A8A] font-normal">(선택)</span>
                         </Label>
                         <Input
@@ -202,12 +283,12 @@ export default function InterestForm() {
 
                       <Button
                         type="submit"
-                        disabled={loading || !form.name || !form.email}
+                        disabled={loading}
                         className="w-full bg-[#6B4423] hover:bg-[#8A5C35] text-white rounded-xl h-12 text-sm font-semibold transition-colors disabled:opacity-40"
                       >
                         {loading ? (
                           <span className="flex items-center gap-2">
-                            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
                               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
                             </svg>
