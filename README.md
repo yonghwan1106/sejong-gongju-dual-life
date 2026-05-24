@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 세종GO 공주LIVE — 듀얼라이프 비용계산기 v2
 
-## Getting Started
+2026 공주시 시정발전 아이디어 공모전 (공고 제2026-1397호) **분야 가. 청년·가족 정착 등 인구 유입 정책** 제안서 첨부용 라이브 프로토타입.
 
-First, run the development server:
+**제안자**: 박용환 (크리에이티브 넥서스 대표)
+**제안 제목**: 세종GO 공주LIVE — BRT 개통 타이밍을 활용한 세종 직장인 공주 정착 패스트트랙
+
+---
+
+## 컨셉
+
+**"세종에서 일하고, 공주에서 산다"** — 세종~공주 광역 BRT 2027.1 개통 타이밍을 정밀 공략, 세종 거주 30~45세 공공기관 직원(잠재 모수 10만명)을 공주 주민등록 인구로 전환하는 패스트트랙 정책 제안.
+
+- 3년 누적 KPI: **+1,600명** 전입 (공주 99,551 → 102,000+)
+- 시 직접 비용: 연 2.2억원 → 지역 소비 유입 연 48억원 (**ROI 21배**)
+- 인센티브 3종: 이사비 50만원 / 보증금 무이자 융자 1,000만원 / BRT 정기권 12개월 무료
+
+## 사이트 구성 (6 + 1 섹션)
+
+1. **HeroBlock** — 메인 헤드라인 + KPI 3개 한 줄
+2. **PopulationGauge** — 99,551 / 100,000 회복 게이지 (카운트업)
+3. **DualLifeCalculator** ★ — 세종 월세·가족·BRT 입력 → 연간 절감액 실시간 계산
+4. **RouteVisualizer** — 세종 한별동↔공주종합버스터미널 BRT 18.5km 라인
+5. **PolicyDeck** — 인센티브 3종 카드 (이사비 / 보증금 융자 / BRT 정기권)
+6. **InterestForm** — 사전 관심 등록 (정책 제안 데모)
+7. **SiteFooter** — 박용환·크리에이티브 넥서스·정책 데모 명시
+
+## 기술 스택
+
+- **Next.js 16** (App Router, Turbopack)
+- **TypeScript**
+- **Tailwind CSS v4** (@theme inline 토큰)
+- **shadcn/ui** (button, card, input, label, slider, tabs, badge, separator)
+- **framer-motion** (스크롤 진입 / 카운트업 / 흐르는 점)
+- **lucide-react** (아이콘)
+- **Pretendard** 폰트 (CDN)
+
+## 디자인 시스템
+
+데이터 저널리즘 × 한국적 모던. 따뜻한 베이지 베이스 + 절제된 알밤 브라운 액센트.
+
+| 토큰 | HEX | 용도 |
+|------|-----|------|
+| beige | `#FAF7F2` | 베이스 배경 |
+| brown | `#6B4423` | 메인 액센트 (CTA, 데이터 강조) |
+| teal | `#2D5F5D` | 보조 액센트 (BRT, 보조 데이터) |
+| terracotta | `#C8553D` | 경고·잔여 카운트만 |
+| text-base | `#1F1F1F` | 본문 |
+| border | `#E2DDD6` | 카드·구획 |
+
+## 로컬 실행
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev    # http://localhost:3000
+npm run build  # 프로덕션 빌드 (Turbopack)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 배포
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Vercel 자동 배포 (main 푸시 시).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 라이선스
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+본 프로젝트는 2026 공주시 시정발전 아이디어 공모전 제안용 데모입니다. 공모전 종료 후 활용에 대해서는 공모전 저작권 이용 동의서 조건을 따릅니다.
