@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import {
   Accordion,
   AccordionContent,
@@ -138,7 +139,10 @@ export default function PolicyFaq() {
                 value={`item-${i}`}
                 className="px-6 sm:px-8 border-none"
               >
-                <AccordionTrigger className="py-5 text-sm sm:text-base font-semibold text-[#1F1F1F] hover:text-[#6B4423] hover:no-underline transition-colors text-left gap-4">
+                <AccordionTrigger
+                  className="py-5 text-sm sm:text-base font-semibold text-[#1F1F1F] hover:text-[#6B4423] hover:no-underline transition-colors text-left gap-4"
+                  onClick={() => track('faq_item_opened', { index: i, question_abbr: faq.q.slice(0, 20) })}
+                >
                   {faq.q}
                 </AccordionTrigger>
                 <AccordionContent className="pb-5">

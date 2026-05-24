@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
+import localFont from 'next/font/local';
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "next-themes";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
+
+const pretendard = localFont({
+  src: '../public/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
+});
 
 const BASE_URL = "https://sejong-gongju-dual-life.vercel.app";
 
@@ -115,17 +123,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="h-full antialiased" suppressHydrationWarning>
+    <html lang="ko" className={`${pretendard.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
-        <link
-          rel="preload"
-          as="style"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
-        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#6B4423" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />

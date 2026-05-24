@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { Card, CardContent } from '@/components/ui/card';
 import { Home, Bus, Truck, PiggyBank, Download, Share2 } from 'lucide-react';
 
@@ -81,6 +82,7 @@ export default function SavingsBreakdown({
       link.download = `공주_듀얼라이프_절감액_${annualTotal}만원.png`;
       link.href = dataUrl;
       link.click();
+      track('result_card_download', { annual_total: annualTotal });
     } catch (e) {
       console.error('PNG export failed', e);
     } finally {
@@ -95,9 +97,11 @@ export default function SavingsBreakdown({
     try {
       if (navigator.share) {
         await navigator.share({ title: '세종·공주 듀얼라이프 절감액', text, url: 'https://sejong-gongju-dual-life.vercel.app' });
+        track('result_card_share', { method: 'native', annual_total: annualTotal });
       } else {
         await navigator.clipboard.writeText(text);
         alert('링크와 내용이 클립보드에 복사되었습니다!');
+        track('result_card_share', { method: 'clipboard', annual_total: annualTotal });
       }
     } catch (e) {
       if (!(e instanceof DOMException && e.name === 'AbortError')) console.error('Share failed', e);

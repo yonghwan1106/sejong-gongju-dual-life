@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,14 +15,38 @@ export default function InterestForm() {
   const [form, setForm] = useState({ name: '', email: '', company: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch('/api/interest')
+      .then((r) => r.json())
+      .then((d) => setCount(d.count))
+      .catch(() => {});
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email) return;
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setLoading(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch('/api/interest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: form.name, company: form.company }),
+      });
+      const data = await res.json();
+      if (data.ok) {
+        setCount(data.count);
+        track('interest_form_submitted', { has_company: !!form.company });
+        setSubmitted(true);
+      }
+    } catch {
+      // fallback: still mark submitted on network error
+      track('interest_form_submitted', { has_company: !!form.company });
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,6 +92,21 @@ export default function InterestForm() {
                 </div>
               ))}
             </div>
+
+            {/* Registration counter */}
+            {count !== null && count > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="mt-8 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#F5EDE3] border border-[#E8DDD3]"
+              >
+                <div className="w-2 h-2 rounded-full bg-[#6B4423] animate-pulse" />
+                <span className="text-sm font-semibold text-[#6B4423]">
+                  현재 사전 등록 <span className="font-black">{count.toLocaleString('ko-KR')}</span>건
+                </span>
+              </motion.div>
+            )}
           </motion.div>
 
           {/* Right: form */}
@@ -94,6 +134,11 @@ export default function InterestForm() {
                       <p className="text-sm text-[#555] leading-relaxed mb-1">
                         감사합니다. 정책이 시행되면 가장 먼저 안내드리겠습니다.
                       </p>
+                      {count !== null && count > 0 && (
+                        <p className="text-sm font-semibold text-[#6B4423] mt-3">
+                          현재 사전 등록 {count.toLocaleString('ko-KR')}건
+                        </p>
+                      )}
                       <p className="text-xs text-[#8A8A8A] mt-4 p-3 rounded-xl bg-[#F5F1EB] border border-[#E2DDD6]">
                         본 사이트는 공주시 공모전 제안 데모이며,<br />
                         실제 정책 시행 전 단계입니다.
@@ -146,6 +191,14 @@ export default function InterestForm() {
                           className="border-[#E2DDD6] bg-white focus-visible:ring-[#6B4423] focus-visible:border-[#6B4423]"
                         />
                       </div>
+
+                      {/* Counter below form */}
+                      {count !== null && count > 0 && (
+                        <p className="text-xs text-center text-[#8A8A8A]">
+                          현재 사전 등록{' '}
+                          <span className="font-semibold text-[#6B4423]">{count.toLocaleString('ko-KR')}건</span>
+                        </p>
+                      )}
 
                       <Button
                         type="submit"

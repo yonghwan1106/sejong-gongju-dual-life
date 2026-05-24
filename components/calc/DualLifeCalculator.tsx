@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { useT } from '@/components/i18n/useT';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
@@ -31,15 +32,26 @@ export default function DualLifeCalculator() {
   const [members, setMembers] = useState(2);
   const [useBrt, setUseBrt] = useState<'yes' | 'no'>('yes');
   const [activePersona, setActivePersona] = useState<string | null>(null);
+  const sliderInteracted = useRef(false);
 
   const applyPersona = (p: Persona) => {
     setRent(p.rent);
     setMembers(p.members);
     setUseBrt(p.useBrt);
     setActivePersona(p.id);
+    track('persona_selected', { persona_id: p.id, rent: p.rent, members: p.members, use_brt: p.useBrt });
   };
 
   const clearPersona = () => setActivePersona(null);
+
+  const handleSliderChange = (v: number) => {
+    setRent(v);
+    clearPersona();
+    if (!sliderInteracted.current) {
+      sliderInteracted.current = true;
+      track('calculator_first_interaction', { trigger: 'slider' });
+    }
+  };
 
   const sejongMonthly = rent * Math.max(members, 1);
   const gongjuMonthly = Math.round(sejongMonthly * 0.6);
@@ -148,7 +160,7 @@ export default function DualLifeCalculator() {
                     max={120}
                     step={5}
                     value={rent}
-                    onValueChange={(v) => { setRent(v as number); clearPersona(); }}
+                    onValueChange={(v) => handleSliderChange(v as number)}
                     className="[&_[data-slot=slider-thumb]]:border-[#6B4423] [&_[data-slot=slider-thumb]]:bg-[#6B4423] [&_[data-slot=slider-range]]:bg-[#6B4423]"
                   />
                   <div className="flex justify-between text-xs text-[#8A8A8A] mt-1.5">
