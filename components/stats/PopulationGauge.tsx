@@ -2,11 +2,27 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, animate } from 'framer-motion';
+import SourceLink from '@/components/ui/SourceLink';
 
 const smallStats = [
-  { value: '−22%', label: '16년간 인구 감소' },
-  { value: '89개', label: '인구감소지역 포함' },
-  { value: '779만', label: '생활인구 (전국 3위)' },
+  {
+    value: '−22%',
+    label: '16년간 인구 감소',
+    href: 'https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1B040A3',
+    source: 'KOSIS 주민등록인구현황 2026.2',
+  },
+  {
+    value: '89개',
+    label: '인구감소지역 포함',
+    href: 'https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do?bbsId=BBSMSTR_000000000008&nttId=93327',
+    source: '행안부 2022 인구감소지역 지정 고시',
+  },
+  {
+    value: '779만',
+    label: '생활인구 (전국 3위)',
+    href: 'https://www.tourismdatalab.kr/',
+    source: '한국관광데이터랩 2024',
+  },
 ];
 
 function CountUp({ target, duration = 1.8 }: { target: number; duration?: number }) {
@@ -67,7 +83,12 @@ export default function PopulationGauge() {
               className="text-6xl sm:text-7xl lg:text-8xl font-black text-[#1F1F1F] leading-none mb-2 tabular-nums"
               style={{ fontWeight: 900 }}
             >
-              <CountUp target={current} />
+              <SourceLink
+                href="https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1B040A3"
+                label="KOSIS 주민등록인구현황 2026.2"
+              >
+                <CountUp target={current} />
+              </SourceLink>
             </div>
             <p className="text-[#8A8A8A] text-sm mb-8">
               공주시 주민등록 인구 (2026.2 기준)
@@ -121,7 +142,9 @@ export default function PopulationGauge() {
                   className="text-3xl font-black text-[#6B4423] tabular-nums min-w-[80px]"
                   style={{ fontWeight: 900 }}
                 >
-                  {s.value}
+                  <SourceLink href={s.href} label={s.source}>
+                    {s.value}
+                  </SourceLink>
                 </div>
                 <div className="text-sm text-[#555555]">{s.label}</div>
               </motion.div>

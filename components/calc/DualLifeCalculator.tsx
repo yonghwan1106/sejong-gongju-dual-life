@@ -9,10 +9,35 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import SavingsBreakdown from './SavingsBreakdown';
 
+interface Persona {
+  id: string;
+  label: string;
+  rent: number;
+  members: number;
+  useBrt: 'yes' | 'no';
+}
+
+const PERSONAS: Persona[] = [
+  { id: 'single', label: '1인 직장인', rent: 60, members: 1, useBrt: 'yes' },
+  { id: 'couple', label: '신혼 부부', rent: 90, members: 2, useBrt: 'yes' },
+  { id: 'family4', label: '4인 가족', rent: 120, members: 4, useBrt: 'yes' },
+  { id: 'nomad', label: '디지털 노마드', rent: 50, members: 1, useBrt: 'no' },
+];
+
 export default function DualLifeCalculator() {
   const [rent, setRent] = useState(70);
   const [members, setMembers] = useState(2);
   const [useBrt, setUseBrt] = useState<'yes' | 'no'>('yes');
+  const [activePersona, setActivePersona] = useState<string | null>(null);
+
+  const applyPersona = (p: Persona) => {
+    setRent(p.rent);
+    setMembers(p.members);
+    setUseBrt(p.useBrt);
+    setActivePersona(p.id);
+  };
+
+  const clearPersona = () => setActivePersona(null);
 
   const sejongMonthly = rent * members;
   const gongjiuMonthly = Math.round(sejongMonthly * 0.6);
@@ -51,6 +76,42 @@ export default function DualLifeCalculator() {
           <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
         </motion.div>
 
+        {/* Persona presets */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.45, delay: 0.05 }}
+          className="mb-6"
+        >
+          <p className="text-xs font-semibold uppercase tracking-wider text-[#8A8A8A] mb-3">
+            빠른 선택 — 나와 비슷한 케이스
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {PERSONAS.map((p) => {
+              const active = activePersona === p.id;
+              return (
+                <motion.button
+                  key={p.id}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => (active ? clearPersona() : applyPersona(p))}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
+                    active
+                      ? 'bg-[#6B4423] text-white border-[#6B4423] shadow-sm'
+                      : 'bg-white text-[#555] border-[#E2DDD6] hover:border-[#6B4423] hover:text-[#6B4423]'
+                  }`}
+                >
+                  {p.label}
+                  {active && (
+                    <span className="ml-1.5 opacity-60 text-xs">✕</span>
+                  )}
+                </motion.button>
+              );
+            })}
+          </div>
+        </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Input panel */}
           <motion.div
@@ -67,16 +128,23 @@ export default function DualLifeCalculator() {
                     <Label className="text-sm font-semibold text-[#1F1F1F]">
                       세종 현재 월세
                     </Label>
-                    <span className="text-xl font-black text-[#6B4423] tabular-nums" style={{ fontWeight: 900 }}>
+                    <motion.span
+                      key={rent}
+                      initial={{ scale: 0.88, opacity: 0.6 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="text-xl font-black text-[#6B4423] tabular-nums"
+                      style={{ fontWeight: 900 }}
+                    >
                       {rent}만원
-                    </span>
+                    </motion.span>
                   </div>
                   <Slider
                     min={30}
                     max={120}
                     step={5}
                     value={rent}
-                    onValueChange={(v) => setRent(v as number)}
+                    onValueChange={(v) => { setRent(v as number); clearPersona(); }}
                     className="[&_[data-slot=slider-thumb]]:border-[#6B4423] [&_[data-slot=slider-thumb]]:bg-[#6B4423] [&_[data-slot=slider-range]]:bg-[#6B4423]"
                   />
                   <div className="flex justify-between text-xs text-[#8A8A8A] mt-1.5">
@@ -99,7 +167,7 @@ export default function DualLifeCalculator() {
                       value={members}
                       onChange={(e) => {
                         const v = parseInt(e.target.value);
-                        if (v >= 1 && v <= 5) setMembers(v);
+                        if (v >= 1 && v <= 5) { setMembers(v); clearPersona(); }
                       }}
                       className="w-20 text-center text-lg font-bold border-[#E2DDD6] focus-visible:ring-[#6B4423]"
                     />
@@ -107,7 +175,7 @@ export default function DualLifeCalculator() {
                       {[1, 2, 3, 4, 5].map((n) => (
                         <button
                           key={n}
-                          onClick={() => setMembers(n)}
+                          onClick={() => { setMembers(n); clearPersona(); }}
                           className={`w-8 h-8 rounded-full text-sm font-semibold transition-colors ${
                             members === n
                               ? 'bg-[#6B4423] text-white'
@@ -128,7 +196,7 @@ export default function DualLifeCalculator() {
                   </Label>
                   <Tabs
                     value={useBrt}
-                    onValueChange={(v) => setUseBrt(v as 'yes' | 'no')}
+                    onValueChange={(v) => { setUseBrt(v as 'yes' | 'no'); clearPersona(); }}
                   >
                     <TabsList className="bg-[#F5F1EB] border border-[#E2DDD6] p-1 rounded-xl">
                       <TabsTrigger
@@ -212,6 +280,10 @@ export default function DualLifeCalculator() {
               brtSaving={brtSaving}
               movingSaving={movingSaving}
               depositSaving={depositSaving}
+              rent={rent}
+              members={members}
+              useBrt={useBrt}
+              annualTotal={annualTotal}
             />
           </motion.div>
         </div>

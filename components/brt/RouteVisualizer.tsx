@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import SourceLink from '@/components/ui/SourceLink';
 
 const stops = [
   { name: '세종 한별동', sub: '출발', side: 'left' },
@@ -102,13 +103,13 @@ export default function RouteVisualizer() {
             className="flex justify-center gap-6 mt-8 flex-wrap"
           >
             {[
-              { label: '노선 거리', value: '18.5km' },
-              { label: '배차 간격', value: '8분' },
-              { label: '통근 시간', value: '약 30분' },
+              { label: '노선 거리', value: '18.5km', href: 'https://www.molit.go.kr/', source: '국토교통부 광역BRT 계획' },
+              { label: '배차 간격', value: '8분', href: 'https://www.molit.go.kr/', source: '국토교통부 광역BRT 계획' },
+              { label: '통근 시간', value: '약 30분', href: 'https://www.molit.go.kr/', source: '국토교통부 광역BRT 계획 2027.1' },
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-xl font-black text-[#2D5F5D] tabular-nums" style={{ fontWeight: 900 }}>
-                  {s.value}
+                  <SourceLink href={s.href} label={s.source}>{s.value}</SourceLink>
                 </div>
                 <div className="text-xs text-[#8A8A8A]">{s.label}</div>
               </div>

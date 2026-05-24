@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
 import { Truck, Banknote, BusFront } from 'lucide-react';
+import SourceLink from '@/components/ui/SourceLink';
 
 const policies = [
   {
@@ -10,6 +11,8 @@ const policies = [
     number: '01',
     title: '이사비 지원',
     amount: '50만원',
+    amountHref: 'https://www.gongju.go.kr/',
+    amountSource: '공주시 결혼·출산장려금 조례',
     amountSub: '공주페이 지급',
     description: '공주시로 전입 시 1회 지급. 공주사랑상품권(공주페이)으로 지역 경제도 함께 살립니다.',
     condition: '전입일 기준 30일 이내 신청',
@@ -22,6 +25,8 @@ const policies = [
     number: '02',
     title: '보증금 무이자 융자',
     amount: '1,000만원',
+    amountHref: 'https://www.gongju.go.kr/',
+    amountSource: '공주시 결혼·출산장려금 조례',
     amountSub: '1년 거주 후 소멸',
     description: '전세·월세 보증금 최대 1,000만원 무이자 융자. 1년 이상 거주 시 상환 의무 소멸.',
     condition: '세종 직장 재직 증명 제출',
@@ -34,6 +39,8 @@ const policies = [
     number: '03',
     title: 'BRT 정기권 무료',
     amount: '144만원',
+    amountHref: 'https://www.molit.go.kr/',
+    amountSource: '국토교통부 광역BRT 2027.1',
     amountSub: '월 12만 × 12개월',
     description: '세종~공주 BRT 정기권 12개월 전액 지원. 2027년 1월 개통에 맞춰 즉시 적용.',
     condition: '전입 후 BRT 이용 등록 필수',
@@ -123,7 +130,9 @@ export default function PolicyDeck() {
                       className="text-3xl font-black tabular-nums mb-0.5"
                       style={{ fontWeight: 900, color: policy.color }}
                     >
-                      {policy.amount}
+                      <SourceLink href={policy.amountHref} label={policy.amountSource}>
+                        {policy.amount}
+                      </SourceLink>
                     </div>
                     <div className="text-xs font-semibold mb-4" style={{ color: policy.color, opacity: 0.65 }}>
                       {policy.amountSub}

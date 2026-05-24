@@ -1,6 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
+
+const BrtCountdown = dynamic(() => import('./BrtCountdown'), { ssr: false });
 
 const kpis = [
   { value: '+1,600명', label: '3년 전입 목표' },
@@ -65,16 +68,26 @@ export default function HeroBlock() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="text-sm text-[#8A8A8A] mb-10"
+          className="text-sm text-[#8A8A8A] mb-8"
         >
           2026 공주시 시정발전 아이디어 공모전 제안 — 박용환
         </motion.p>
+
+        {/* BRT Countdown */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.42 }}
+          className="mb-8"
+        >
+          <BrtCountdown />
+        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
+          transition={{ duration: 0.5, delay: 0.52 }}
           className="flex flex-col sm:flex-row gap-3 mb-16"
         >
           <motion.button
@@ -102,7 +115,7 @@ export default function HeroBlock() {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.65 }}
           className="flex flex-col sm:flex-row gap-0 border border-[#E2DDD6] rounded-2xl overflow-hidden bg-white max-w-2xl"
         >
           {kpis.map((kpi, i) => (
