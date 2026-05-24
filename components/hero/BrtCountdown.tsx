@@ -44,10 +44,10 @@ export default function BrtCountdown() {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.55 }}
-      className="inline-flex items-center gap-4 px-5 py-3 bg-white border border-[#E2DDD6] rounded-2xl shadow-sm"
+      className="inline-flex items-center gap-4 px-5 py-3 bg-white dark:bg-[#1A1A1A] border border-[#E2DDD6] dark:border-[#2A2A2A] rounded-2xl shadow-sm"
     >
       {/* D-day big number */}
-      <div className="flex flex-col items-center leading-none pr-4 border-r border-[#E2DDD6]">
+      <div className="flex flex-col items-center leading-none pr-4 border-r border-[#E2DDD6] dark:border-[#2A2A2A]">
         <span className="text-[10px] font-semibold tracking-widest uppercase text-[#8A8A8A] mb-0.5">
           {t('brtCountdown')}
         </span>

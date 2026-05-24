@@ -8,8 +8,6 @@ interface SourceLinkProps {
   children: React.ReactNode;
 }
 
-let _counter = 0;
-
 /**
  * SourceLink — wraps a stat value with a superscript citation.
  * Hover reveals a tooltip with the source label; clicking opens in new tab.

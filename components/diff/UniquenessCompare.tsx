@@ -80,7 +80,7 @@ const assets = [
 
 export default function UniquenessCompare() {
   return (
-    <section className="bg-[#FAF7F2] py-20 border-t border-[#E2DDD6]">
+    <section className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
@@ -94,7 +94,7 @@ export default function UniquenessCompare() {
             차별성 분석
           </span>
           <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight"
+            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
             style={{ fontWeight: 900, wordBreak: 'keep-all' }}
           >
             89개 인구감소지역 중
@@ -116,7 +116,7 @@ export default function UniquenessCompare() {
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: i * 0.08 }}
                 whileHover={{ y: -3, transition: { duration: 0.18 } }}
-                className="rounded-2xl border p-6 flex flex-col gap-4 bg-white"
+                className="rounded-2xl border p-6 flex flex-col gap-4 bg-white dark:bg-[#1A1A1A]"
                 style={{ borderColor: asset.accentBorder }}
               >
                 {/* Icon */}
@@ -146,7 +146,7 @@ export default function UniquenessCompare() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-sm font-bold text-[#1F1F1F]">{asset.title}</h3>
+                <h3 className="text-sm font-bold text-[#1F1F1F] dark:text-[#F0F0F0]">{asset.title}</h3>
 
                 {/* Compare */}
                 <div className="mt-auto space-y-1.5">

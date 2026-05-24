@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s — 세종·공주 듀얼라이프",
   },
   description:
-    "2027년 BRT 개통을 활용한 세종-공주 듀얼라이프 정착 패스트트랙 제안. 30분 통근 + 3종 인센티브로 공주시 인구 100,000 회복 경로를 제시합니다. 박용환, 크리에이티브 넥서스.",
+    "2027년 BRT 개통으로 공주 정착이 가능해집니다. 이사비·보증금·BRT 정기권 3종 인센티브, 세종 직장인 대상 전입 패스트트랙 제안. 듀얼라이프 비용계산기로 절감액을 직접 확인하세요.",
   keywords: [
     "공주시",
     "세종시",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: "세종·공주 듀얼라이프 제안",
     title: "세종에서 일하고, 공주에서 산다",
     description:
-      "BRT 개통 타이밍 공주 정착 패스트트랙 — 2026 공주시 시정발전 아이디어 공모전 제안",
+      "2027년 BRT 개통으로 공주 정착이 가능해집니다. 이사비·보증금·BRT 정기권 3종 인센티브, 세종 직장인 대상 전입 패스트트랙 제안. 듀얼라이프 비용계산기로 절감액을 직접 확인하세요.",
     images: [
       {
         url: "/opengraph-image",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "세종에서 일하고, 공주에서 산다",
     description:
-      "BRT 개통 타이밍 공주 정착 패스트트랙 — 2026 공주시 시정발전 아이디어 공모전",
+      "2027년 BRT 개통으로 공주 정착이 가능해집니다. 이사비·보증금·BRT 정기권 3종 인센티브, 세종 직장인 대상 전입 패스트트랙 제안. 듀얼라이프 비용계산기로 절감액을 직접 확인하세요.",
     images: ["/opengraph-image"],
     creator: "@yonghwan1106",
   },

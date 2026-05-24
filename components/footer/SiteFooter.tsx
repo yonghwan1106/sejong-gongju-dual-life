@@ -8,7 +8,7 @@ export default function SiteFooter() {
             <div className="text-base font-black mb-2" style={{ fontWeight: 900 }}>
               공주 듀얼라이프
             </div>
-            <div className="text-xs text-white/50 leading-relaxed">
+            <div className="text-xs text-white/65 leading-relaxed">
               세종에서 일하고, 공주에서 산다.<br />
               BRT 개통을 활용한 인구 회복 전략.
             </div>
@@ -16,18 +16,18 @@ export default function SiteFooter() {
 
           {/* Proposal info */}
           <div>
-            <div className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+            <div className="text-xs font-semibold uppercase tracking-widest text-white/65 mb-3">
               제안 정보
             </div>
             <div className="text-sm text-white/70 space-y-1">
               <div>2026 공주시 시정발전 아이디어 공모전</div>
-              <div className="text-white/40">제안자: 박용환 (크리에이티브 넥서스)</div>
+              <div className="text-white/65">제안자: 박용환 (크리에이티브 넥서스)</div>
             </div>
           </div>
 
           {/* Links */}
           <div>
-            <div className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">
+            <div className="text-xs font-semibold uppercase tracking-widest text-white/65 mb-3">
               링크
             </div>
             <div className="space-y-2">
@@ -52,10 +52,10 @@ export default function SiteFooter() {
         </div>
 
         <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-white/75">
             본 사이트는 정책 제안 데모입니다. 실제 정책 시행 전 단계이며, 공식 공주시 사이트가 아닙니다.
           </p>
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-white/75">
             © 2026 박용환 · 크리에이티브 넥서스
           </p>
         </div>

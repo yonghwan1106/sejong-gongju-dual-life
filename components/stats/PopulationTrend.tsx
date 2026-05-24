@@ -77,7 +77,7 @@ const LAST = DATA[DATA.length - 1];
 const Y_TICKS = [100000, 110000, 120000, 130000, 138069].map((v) => ({
   v,
   y: scaleY(v),
-  label: v === 138069 ? '138,069' : `${v / 1000}만`,
+  label: v === 138069 ? '138,069' : `${(v / 10000).toFixed(0)}만`,
 }));
 
 const X_TICKS = [1995, 2000, 2005, 2010, 2015, 2020, 2026];
@@ -89,7 +89,7 @@ export default function PopulationTrend() {
   return (
     <section
       ref={sectionRef}
-      className="bg-white py-20 border-t border-[#E2DDD6]"
+      className="bg-white dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
@@ -103,7 +103,7 @@ export default function PopulationTrend() {
             인구 추이
           </span>
           <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight"
+            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
             style={{ fontWeight: 900, wordBreak: 'keep-all' }}
           >
             30년의 곡선 —
@@ -118,7 +118,7 @@ export default function PopulationTrend() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="relative overflow-x-auto"
+          className="relative overflow-x-auto dark:opacity-80"
         >
           <svg
             viewBox={`0 0 ${W} ${H}`}
@@ -321,7 +321,7 @@ export default function PopulationTrend() {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3"
         >
-          <p className="text-sm text-[#555555]" style={{ wordBreak: 'keep-all' }}>
+          <p className="text-sm text-[#555555] dark:text-[#AAAAAA]" style={{ wordBreak: 'keep-all' }}>
             <span className="font-semibold text-[#C8553D]">16년간 −22%</span>
             {' '}— 세종 출범(2013) 이후 인구 유출 가속. 10만 선 붕괴.
           </p>

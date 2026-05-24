@@ -80,7 +80,7 @@ const numbers = [
 
 export default function GongjuByNumbers() {
   return (
-    <section className="bg-[#FAF7F2] py-20 border-t border-[#E2DDD6]">
+    <section className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
@@ -94,7 +94,7 @@ export default function GongjuByNumbers() {
             기본 현황
           </span>
           <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight"
+            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
             style={{ fontWeight: 900, wordBreak: 'keep-all' }}
           >
             숫자로 보는
@@ -113,7 +113,7 @@ export default function GongjuByNumbers() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="bg-white rounded-2xl border border-[#E2DDD6] p-5 flex flex-col gap-1.5"
+              className="bg-white dark:bg-[#1A1A1A] rounded-2xl border border-[#E2DDD6] dark:border-[#2A2A2A] p-5 flex flex-col gap-1.5"
             >
               <div
                 className="text-2xl sm:text-3xl font-black tabular-nums leading-none"
@@ -123,7 +123,7 @@ export default function GongjuByNumbers() {
                   {item.value}
                 </SourceLink>
               </div>
-              <div className="text-sm font-semibold text-[#1F1F1F]">{item.label}</div>
+              <div className="text-sm font-semibold text-[#1F1F1F] dark:text-[#F0F0F0]">{item.label}</div>
               <div className="text-xs text-[#8A8A8A]">{item.sub}</div>
             </motion.div>
           ))}

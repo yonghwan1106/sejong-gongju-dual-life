@@ -52,7 +52,7 @@ const policies = [
 
 export default function PolicyDeck() {
   return (
-    <section id="incentives" className="bg-[#FAF7F2] py-20">
+    <section id="incentives" className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
@@ -66,7 +66,7 @@ export default function PolicyDeck() {
             인센티브 패키지
           </span>
           <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight"
+            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
             style={{ fontWeight: 900, wordBreak: 'keep-all' }}
           >
             이사 결정을 쉽게 만드는
@@ -139,7 +139,7 @@ export default function PolicyDeck() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-base font-bold text-[#1F1F1F] mb-3">
+                    <h3 className="text-base font-bold text-[#1F1F1F] dark:text-[#F0F0F0] mb-3">
                       {policy.title}
                     </h3>
 

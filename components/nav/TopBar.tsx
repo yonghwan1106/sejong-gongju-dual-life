@@ -28,8 +28,7 @@ export default function TopBar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <span
-            className="text-sm font-700 tracking-tight text-[#6B4423] dark:text-[#D4A574]"
-            style={{ fontWeight: 700 }}
+            className="text-sm font-bold tracking-tight text-[#6B4423] dark:text-[#D4A574]"
           >
             {t('navTitle')}
           </span>

@@ -100,14 +100,14 @@ export default function SavingsBreakdown({
         alert('링크와 내용이 클립보드에 복사되었습니다!');
       }
     } catch (e) {
-      // user cancelled — ignore
+      if (!(e instanceof DOMException && e.name === 'AbortError')) console.error('Share failed', e);
     } finally {
       setSharing(false);
     }
   };
 
   return (
-    <Card className="border-[#E2DDD6] shadow-none bg-white flex-1">
+    <Card className="border-[#E2DDD6] dark:border-[#2A2A2A] shadow-none bg-white dark:bg-[#1A1A1A] flex-1">
       <CardContent className="p-6 sm:p-7">
         <p className="text-xs font-semibold uppercase tracking-wider text-[#8A8A8A] mb-4">
           절감 내역 분해
@@ -137,7 +137,7 @@ export default function SavingsBreakdown({
                   >
                     <Icon className="w-4 h-4" style={{ color: item.color }} />
                   </div>
-                  <span className="flex-1 text-sm text-[#555]">{item.label}</span>
+                  <span className="flex-1 text-sm text-[#555] dark:text-[#AAAAAA]">{item.label}</span>
                   <span
                     className="font-black tabular-nums text-base"
                     style={{ fontWeight: 900, color: item.value > 0 ? item.color : '#8A8A8A' }}
@@ -189,7 +189,7 @@ export default function SavingsBreakdown({
             className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 border border-[#E2DDD6] text-[#1F1F1F] text-sm font-semibold rounded-xl hover:bg-[#F5F1EB] transition-colors disabled:opacity-60"
           >
             <Share2 className="w-4 h-4" />
-            {sharing ? '공유 중…' : '카카오톡 공유'}
+            {sharing ? '공유 중…' : '결과 공유하기'}
           </motion.button>
         </div>
       </CardContent>

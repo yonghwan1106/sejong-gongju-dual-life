@@ -41,9 +41,9 @@ export default function DualLifeCalculator() {
 
   const clearPersona = () => setActivePersona(null);
 
-  const sejongMonthly = rent * members;
-  const gongjiuMonthly = Math.round(sejongMonthly * 0.6);
-  const monthlyDiff = sejongMonthly - gongjiuMonthly;
+  const sejongMonthly = rent * Math.max(members, 1);
+  const gongjuMonthly = Math.round(sejongMonthly * 0.6);
+  const monthlyDiff = sejongMonthly - gongjuMonthly;
 
   const brtSaving = useBrt === 'yes' ? 144 : 0;
   const movingSaving = 50;
@@ -51,7 +51,9 @@ export default function DualLifeCalculator() {
   const annualTotal = monthlyDiff * 12 + brtSaving + movingSaving + depositSaving;
 
   const sejongBarPct = 100;
-  const gongjiuBarPct = Math.round((gongjiuMonthly / sejongMonthly) * 100);
+  const gongjuBarPct = sejongMonthly > 0
+    ? Math.round((gongjuMonthly / sejongMonthly) * 100)
+    : 0;
 
   return (
     <section id="calculator" className="bg-[#FAF7F2] py-20">
@@ -223,7 +225,7 @@ export default function DualLifeCalculator() {
                   <div className="space-y-3">
                     {[
                       { label: '세종', pct: sejongBarPct, value: sejongMonthly, color: '#E8DDD3' },
-                      { label: '공주', pct: gongjiuBarPct, value: gongjiuMonthly, color: '#6B4423' },
+                      { label: '공주', pct: gongjuBarPct, value: gongjuMonthly, color: '#6B4423' },
                     ].map((bar) => (
                       <div key={bar.label} className="flex items-center gap-3">
                         <span className="text-xs font-semibold text-[#555] w-8">{bar.label}</span>
