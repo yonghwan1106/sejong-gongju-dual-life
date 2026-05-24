@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface KpiRow {
   metric: string;
@@ -75,30 +76,18 @@ export default function KpiTable() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            KPI
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            5년 인구 회복 시나리오{' '}
-            <span className="text-[#6B4423]">— 7개 지표</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
+        <div className="mb-10">
+          <SectionHeading
+            eyebrow="KPI"
+            title={<>5년 인구 회복 시나리오{' '}<span className="text-[#6B4423]">— 7개 지표</span></>}
+            accentColor="#6B4423"
+          />
           <p className="mt-3 text-xs text-[#8A8A8A]">
             <SourceLink href="https://www.gongju.go.kr/" label="공주시 인구정책 제안서 vF lock 기준">
               출처: 제안서 vF lock 기준
             </SourceLink>
           </p>
-        </motion.div>
+        </div>
 
         {/* Desktop table */}
         <motion.div

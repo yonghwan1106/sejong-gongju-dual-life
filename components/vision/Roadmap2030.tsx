@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, animate, useInView } from 'framer-motion';
+import { motion, animate, useInView, AnimatePresence } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 const YEARS = [2025, 2026, 2027, 2028, 2029, 2030] as const;
 type Year = (typeof YEARS)[number];
@@ -108,8 +109,33 @@ function AnimatedDecimal({ value }: { value: number }) {
   return <span className="tabular-nums">{display.toFixed(2)}</span>;
 }
 
+const BASELINE: Record<Year, number> = {
+  2025: 99551,
+  2026: 99200,
+  2027: 98800,
+  2028: 98300,
+  2029: 97800,
+  2030: 97300,
+};
+
+const EXPAND_CARDS = [
+  {
+    title: '공주 모델 매뉴얼화',
+    desc: '행안부 우수사례 등재 → 전국 표준 가이드라인 수록',
+  },
+  {
+    title: '전국 12개 지역 확산',
+    desc: '광역시 인접 인구감소지역 12개 즉시 적용 가능',
+  },
+  {
+    title: '지방소멸대응기금 영구 매칭',
+    desc: '5년 성과 기반 기금 매칭 영구화 — 재정 자립 구조',
+  },
+];
+
 export default function Roadmap2030() {
   const [selectedYear, setSelectedYear] = useState<Year>(2025);
+  const [expandOpen, setExpandOpen] = useState(false);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -122,24 +148,13 @@ export default function Roadmap2030() {
     <section ref={ref} id="roadmap" className="bg-white dark:bg-[#0F0F0F] py-20 border-b border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            비전 2030
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            비전 2030 —{' '}
-            <span className="text-[#C8553D]">공주 인구 10만 회복 시나리오</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#C8553D]" />
-        </motion.div>
+        <div className="mb-12">
+          <SectionHeading
+            eyebrow="비전 2030"
+            title={<>비전 2030 —{' '}<span className="text-[#C8553D]">공주 인구 10만 회복 시나리오</span></>}
+            accentColor="#C8553D"
+          />
+        </div>
 
         <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-start">
           {/* Left: Year selector */}
@@ -314,6 +329,113 @@ export default function Roadmap2030() {
             </div>
           </motion.div>
         </div>
+
+        {/* 정책 미적용 시나리오 */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-10 p-5 rounded-2xl border border-[#E2DDD6] dark:border-[#2A2A2A] bg-[#FAF7F2] dark:bg-[#1A1A1A]"
+        >
+          <p className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A] mb-4">
+            정책 미적용 시나리오 비교
+          </p>
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+            {YEARS.map((year) => {
+              const withPolicy = DATA[year].population;
+              const without = BASELINE[year];
+              const diff = withPolicy - without;
+              const isSelected = year === selectedYear;
+              return (
+                <button
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                  className={`flex flex-col items-center gap-1 p-3 rounded-xl border transition-all ${
+                    isSelected
+                      ? 'border-[#C8553D] bg-white dark:bg-[#0F0F0F]'
+                      : 'border-[#E2DDD6] dark:border-[#2A2A2A] hover:border-[#C8553D]/40'
+                  }`}
+                >
+                  <span className="text-[10px] font-semibold text-[#8A8A8A]">{year}</span>
+                  <span className="text-xs font-black text-[#C8553D] tabular-nums">
+                    {withPolicy.toLocaleString('ko-KR')}
+                  </span>
+                  <span className="text-[10px] text-[#8A8A8A] tabular-nums line-through">
+                    {without.toLocaleString('ko-KR')}
+                  </span>
+                  {diff > 0 && (
+                    <span className="text-[10px] font-bold text-[#2D5F5D]">
+                      +{diff.toLocaleString('ko-KR')}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <p className="mt-3 text-xs text-[#8A8A8A]">
+            2030 기준 정책 적용 vs 미적용 차이:{' '}
+            <span className="font-bold text-[#C8553D]">
+              +{(DATA[2030].population - BASELINE[2030]).toLocaleString('ko-KR')}명
+            </span>
+          </p>
+        </motion.div>
+
+        {/* 2030+ 확산 시나리오 토글 */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-6"
+        >
+          <button
+            onClick={() => setExpandOpen((v) => !v)}
+            className="flex items-center gap-2 text-sm font-semibold text-[#6B4423] dark:text-[#D4A574] hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 rounded"
+            aria-expanded={expandOpen}
+          >
+            <span
+              className="inline-block transition-transform duration-200"
+              style={{ transform: expandOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}
+            >
+              ▶
+            </span>
+            2030+ 확산 시나리오 보기
+          </button>
+
+          <AnimatePresence>
+            {expandOpen && (
+              <motion.div
+                key="expand"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="overflow-hidden"
+              >
+                <div className="grid sm:grid-cols-3 gap-4 mt-4">
+                  {EXPAND_CARDS.map((card, i) => (
+                    <motion.div
+                      key={card.title}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: i * 0.08 }}
+                      className="p-5 rounded-2xl border border-[#E2DDD6] dark:border-[#2A2A2A] bg-white dark:bg-[#1A1A1A]"
+                    >
+                      <div className="text-xs font-semibold tracking-widest uppercase text-[#6B4423] dark:text-[#D4A574] mb-2">
+                        0{i + 1}
+                      </div>
+                      <div className="text-sm font-black text-[#1F1F1F] dark:text-[#F0F0F0] mb-1" style={{ wordBreak: 'keep-all' }}>
+                        {card.title}
+                      </div>
+                      <div className="text-xs text-[#8A8A8A] leading-relaxed" style={{ wordBreak: 'keep-all' }}>
+                        {card.desc}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );

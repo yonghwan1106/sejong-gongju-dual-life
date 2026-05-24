@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Card, CardContent } from '@/components/ui/card';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Truck, Banknote, BusFront } from 'lucide-react';
 import SourceLink from '@/components/ui/SourceLink';
 
@@ -55,25 +56,12 @@ export default function PolicyDeck() {
     <section id="policy" className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            인센티브 패키지
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            이사 결정을 쉽게 만드는
-            <br />
-            <span className="text-[#6B4423]">3종 정착 지원금</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
+        <div className="mb-12">
+          <SectionHeading
+            eyebrow="인센티브 패키지"
+            title={<>이사 결정을 쉽게 만드는<br /><span className="text-[#6B4423]">3종 정착 지원금</span></>}
+            accentColor="#6B4423"
+          />
 
           {/* Total banner */}
           <motion.div
@@ -89,7 +77,7 @@ export default function PolicyDeck() {
             </span>
             <span className="text-sm opacity-70">(1년 기준)</span>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Cards grid */}
         <div className="grid md:grid-cols-3 gap-5">

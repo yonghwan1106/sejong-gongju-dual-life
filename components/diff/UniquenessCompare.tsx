@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import {
   Train,
   Landmark,
@@ -83,26 +84,13 @@ export default function UniquenessCompare() {
     <section id="why" className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            차별성 분석
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            89개 인구감소지역 중
-            <br />
-            <span className="text-[#6B4423]">공주만 가진 것</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
-        </motion.div>
+        <div className="mb-12">
+          <SectionHeading
+            eyebrow="차별성 분석"
+            title={<>89개 인구감소지역 중<br /><span className="text-[#6B4423]">공주만 가진 것</span></>}
+            accentColor="#6B4423"
+          />
+        </div>
 
         {/* Cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">

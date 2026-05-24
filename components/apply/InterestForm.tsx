@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, type FormEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { track } from '@vercel/analytics';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -89,18 +90,13 @@ export default function InterestForm() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.55 }}
           >
-            <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-              사전 관심 등록
-            </span>
-            <h2
-              className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight mb-4"
-              style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-            >
-              공주 이사,
-              <br />
-              <span className="text-[#6B4423] dark:text-[#D4A574]">관심 있으신가요?</span>
-            </h2>
-            <div className="h-0.5 w-8 bg-[#6B4423] mb-6" />
+            <div className="mb-6">
+              <SectionHeading
+                eyebrow="사전 관심 등록"
+                title={<>공주 이사,<br /><span className="text-[#6B4423] dark:text-[#D4A574]">관심 있으신가요?</span></>}
+                accentColor="#6B4423"
+              />
+            </div>
             <p className="text-[#555] text-sm leading-relaxed mb-8" style={{ wordBreak: 'keep-all' }}>
               아직 정책 제안 단계입니다. 관심을 등록해 두시면 실제 시행 시 가장 먼저 안내를 드립니다.
               세종 직장인, 육아 가족, 재택근무자 모두 환영합니다.

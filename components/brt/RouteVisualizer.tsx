@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 const stops = [
   { name: '세종 한별동', sub: '출발', side: 'left' },
@@ -18,25 +19,13 @@ export default function RouteVisualizer() {
     <section ref={ref} className="bg-white dark:bg-[#0F0F0F] py-20 border-b border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            BRT 통근 시뮬레이션
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            30분이면
-            <br />
-            <span className="text-[#2D5F5D]">세종 직장에 닿는다</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#2D5F5D]" />
-        </motion.div>
+        <div className="mb-10">
+          <SectionHeading
+            eyebrow="BRT 통근 시뮬레이션"
+            title={<>30분이면<br /><span className="text-[#2D5F5D]">세종 직장에 닿는다</span></>}
+            accentColor="#2D5F5D"
+          />
+        </div>
 
         {/* Route line */}
         <motion.div
@@ -57,22 +46,14 @@ export default function RouteVisualizer() {
               />
             </div>
 
-            {/* Animated train dot */}
+            {/* Animated train dot — CSS keyframes (GPU composited, no RAF loop) */}
             {inView && (
-              <motion.div
-                className="absolute top-1/2 -translate-y-1/2 z-20"
-                initial={{ left: '0%' }}
-                animate={{ left: ['0%', '100%', '0%'] }}
-                transition={{
-                  duration: 4,
-                  delay: 1.2,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                  times: [0, 0.45, 1],
-                }}
+              <div
+                className="absolute top-1/2 -translate-y-1/2 z-20 animate-brt-flow"
+                style={{ animationDelay: '1.2s' }}
               >
                 <div className="w-5 h-5 rounded-full bg-[#2D5F5D] border-2 border-white shadow-md -translate-x-1/2" />
-              </motion.div>
+              </div>
             )}
 
             {/* Stops */}

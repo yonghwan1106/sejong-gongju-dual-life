@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface EvalItem {
   num: string;
@@ -66,28 +67,16 @@ export default function EvaluationMap() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            공모 평가표 100점
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            심사 5항목,{' '}
-            <span className="text-[#6B4423]">사이트 어디에서 답을 보시면 됩니다</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
+        <div className="mb-12">
+          <SectionHeading
+            eyebrow="공모 평가표 100점"
+            title={<>심사 5항목,{' '}<span className="text-[#6B4423]">사이트 어디에서 답을 보시면 됩니다</span></>}
+            accentColor="#6B4423"
+          />
           <p className="mt-4 text-sm text-[#8A8A8A]" style={{ wordBreak: 'keep-all' }}>
             각 평가 항목 카드를 클릭하면 해당 섹션으로 이동합니다.
           </p>
-        </motion.div>
+        </div>
 
         {/* Cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">

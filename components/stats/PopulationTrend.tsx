@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 // Data points: [year, population]
 const DATA: [number, number][] = [
@@ -94,25 +95,13 @@ export default function PopulationTrend() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            인구 추이
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            30년의 곡선 —
-            <br />
-            <span className="text-[#C8553D]">공주가 잃은 사람들</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
-        </motion.div>
+        <div className="mb-10">
+          <SectionHeading
+            eyebrow="인구 추이"
+            title={<>30년의 곡선 —<br /><span className="text-[#C8553D]">공주가 잃은 사람들</span></>}
+            accentColor="#6B4423"
+          />
+        </div>
 
         {/* Chart */}
         <motion.div

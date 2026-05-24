@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 const numbers = [
   {
@@ -83,26 +84,13 @@ export default function GongjuByNumbers() {
     <section className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            기본 현황
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            숫자로 보는
-            <br />
-            <span className="text-[#6B4423]">공주</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
-        </motion.div>
+        <div className="mb-12">
+          <SectionHeading
+            eyebrow="기본 현황"
+            title={<>숫자로 보는<br /><span className="text-[#6B4423]">공주</span></>}
+            accentColor="#6B4423"
+          />
+        </div>
 
         {/* Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4">

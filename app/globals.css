@@ -83,6 +83,12 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
+  /* v3.4 shorthand tokens (점진 마이그레이션용) */
+  --color-brand-bg:         #FAF7F2;
+  --color-brand-card:       #FFFFFF;
+  --color-brand-terracotta: #C8553D;
+  --color-brand-border:     #E2DDD6;
+
   /* v2 Brand tokens */
   --color-brand-beige:      #FAF7F2;
   --color-brand-beige-alt:  #F5F1EB;
@@ -162,6 +168,19 @@
   background: #E2DDD6;
 }
 
+/* BRT train dot — CSS keyframes (replaces framer-motion Infinity RAF) */
+@keyframes brt-flow {
+  0%   { left: 0%; }
+  45%  { left: 100%; }
+  55%  { left: 100%; }
+  100% { left: 0%; }
+}
+.animate-brt-flow {
+  position: absolute;
+  animation: brt-flow 4s ease-in-out infinite;
+  will-change: left;
+}
+
 /* WCAG 2.2.2 — prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -171,5 +190,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+  .animate-brt-flow {
+    animation: none;
+    left: 50%;
   }
 }

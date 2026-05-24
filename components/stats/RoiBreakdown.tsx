@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 
 interface CalcStep {
   label: string;
@@ -102,25 +103,13 @@ export default function RoiBreakdown() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-12"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            투자 대비 효과
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            ROI 21배{' '}
-            <span className="text-[#6B4423]">— 수식으로 검증</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
-        </motion.div>
+        <div className="mb-12">
+          <SectionHeading
+            eyebrow="투자 대비 효과"
+            title={<>ROI 21배{' '}<span className="text-[#6B4423]">— 수식으로 검증</span></>}
+            accentColor="#6B4423"
+          />
+        </div>
 
         {/* ROI summary badges */}
         <motion.div

@@ -33,10 +33,34 @@ export default function BrtCountdown() {
   const [state, setState] = useState<CountdownState>(() => getCountdown());
 
   useEffect(() => {
-    const id = setInterval(() => {
-      setState(getCountdown());
-    }, 1000);
-    return () => clearInterval(id);
+    let timer: ReturnType<typeof setInterval> | null = null;
+
+    const start = () => {
+      if (timer) return;
+      timer = setInterval(() => {
+        setState(getCountdown());
+      }, 1000);
+    };
+
+    const stop = () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    };
+
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible') start();
+      else stop();
+    };
+
+    start();
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      stop();
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
   }, []);
 
   return (

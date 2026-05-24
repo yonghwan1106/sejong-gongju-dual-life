@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { track } from '@vercel/analytics';
 import { useT } from '@/components/i18n/useT';
 import { Slider } from '@/components/ui/slider';
@@ -71,26 +72,13 @@ export default function DualLifeCalculator() {
     <section id="calculator" className="bg-[#FAF7F2] py-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="mb-10"
-        >
-          <span className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A]">
-            비용 시뮬레이터
-          </span>
-          <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight"
-            style={{ fontWeight: 900, wordBreak: 'keep-all' }}
-          >
-            내 연간 절감액,
-            <br />
-            <span className="text-[#6B4423]">직접 계산해 보세요</span>
-          </h2>
-          <div className="mt-3 h-0.5 w-8 bg-[#6B4423]" />
-        </motion.div>
+        <div className="mb-10">
+          <SectionHeading
+            eyebrow="비용 시뮬레이터"
+            title={<>내 연간 절감액,<br /><span className="text-[#6B4423]">직접 계산해 보세요</span></>}
+            accentColor="#6B4423"
+          />
+        </div>
 
         {/* Persona presets */}
         <motion.div
