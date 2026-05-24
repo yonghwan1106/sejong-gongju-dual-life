@@ -23,7 +23,7 @@ export default function InterestForm() {
   };
 
   return (
-    <section id="apply" className="bg-white py-20 border-t border-[#E2DDD6]">
+    <section id="apply" className="bg-white dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left: copy */}
@@ -37,12 +37,12 @@ export default function InterestForm() {
               사전 관심 등록
             </span>
             <h2
-              className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight mb-4"
+              className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight mb-4"
               style={{ fontWeight: 900, wordBreak: 'keep-all' }}
             >
               공주 이사,
               <br />
-              <span className="text-[#6B4423]">관심 있으신가요?</span>
+              <span className="text-[#6B4423] dark:text-[#D4A574]">관심 있으신가요?</span>
             </h2>
             <div className="h-0.5 w-8 bg-[#6B4423] mb-6" />
             <p className="text-[#555] text-sm leading-relaxed mb-8" style={{ wordBreak: 'keep-all' }}>
@@ -74,7 +74,7 @@ export default function InterestForm() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.55, delay: 0.1 }}
           >
-            <Card className="border-[#E2DDD6] shadow-none bg-[#FAF7F2]">
+            <Card className="border-[#E2DDD6] dark:border-[#2A2A2A] shadow-none bg-[#FAF7F2] dark:bg-[#1A1A1A]">
               <CardContent className="p-6 sm:p-8">
                 <AnimatePresence mode="wait">
                   {submitted ? (

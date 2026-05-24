@@ -100,7 +100,7 @@ const faqs = [
 
 export default function PolicyFaq() {
   return (
-    <section className="bg-[#FAF7F2] py-20 border-t border-[#E2DDD6]">
+    <section className="bg-[#FAF7F2] dark:bg-[#0F0F0F] py-20 border-t border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
@@ -114,7 +114,7 @@ export default function PolicyFaq() {
             FAQ
           </span>
           <h2
-            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] leading-tight"
+            className="mt-2 text-3xl sm:text-4xl font-black text-[#1F1F1F] dark:text-[#F0F0F0] leading-tight"
             style={{ fontWeight: 900, wordBreak: 'keep-all' }}
           >
             자주 묻는 질문 —

@@ -57,7 +57,7 @@ export default function PopulationGauge() {
   const remaining = target - current;
 
   return (
-    <section ref={sectionRef} className="bg-white py-20 border-y border-[#E2DDD6]">
+    <section ref={sectionRef} className="bg-white dark:bg-[#0F0F0F] py-20 border-y border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div

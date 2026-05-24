@@ -15,7 +15,7 @@ export default function RouteVisualizer() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section ref={ref} className="bg-white py-20 border-b border-[#E2DDD6]">
+    <section ref={ref} className="bg-white dark:bg-[#0F0F0F] py-20 border-b border-[#E2DDD6] dark:border-[#2A2A2A]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div

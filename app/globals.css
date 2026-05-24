@@ -4,6 +4,41 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Dark mode overrides — activated by .dark class on <html> (next-themes) */
+.dark {
+  --background: #0F0F0F;
+  --foreground: #F0F0F0;
+  --card: #1A1A1A;
+  --card-foreground: #F0F0F0;
+  --popover: #1A1A1A;
+  --popover-foreground: #F0F0F0;
+  --primary: #D4A574;
+  --primary-foreground: #0F0F0F;
+  --secondary: #1A1A1A;
+  --secondary-foreground: #F0F0F0;
+  --muted: #1A1A1A;
+  --muted-foreground: #888888;
+  --accent: #2A2A2A;
+  --accent-foreground: #D4A574;
+  --border: #2A2A2A;
+  --input: #2A2A2A;
+  --ring: #D4A574;
+
+  /* Brand tokens dark */
+  --color-brand-beige:      #0F0F0F;
+  --color-brand-beige-alt:  #1A1A1A;
+  --color-brand-brown:      #D4A574;
+  --color-brand-brown-light:#E8C49A;
+  --color-brand-brown-muted:#2A2A2A;
+  --color-brand-teal:       #5BAAA6;
+  --color-brand-teal-light: #7DCAC6;
+  --color-brand-text:       #F0F0F0;
+  --color-brand-sub:        #AAAAAA;
+  --color-brand-meta:       #666666;
+  --color-brand-line:       #2A2A2A;
+  --color-brand-white:      #1A1A1A;
+}
+
 @theme inline {
   /* Shadcn primitives */
   --color-background: var(--background);

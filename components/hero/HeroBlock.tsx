@@ -17,7 +17,7 @@ export default function HeroBlock() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center pt-14 bg-[#FAF7F2] overflow-hidden">
+    <section className="relative min-h-screen flex flex-col justify-center pt-14 bg-[#FAF7F2] dark:bg-[#0F0F0F] overflow-hidden">
       {/* Subtle background texture lines */}
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "next-themes";
+import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 
 const BASE_URL = "https://sejong-gongju-dual-life.vercel.app";
 
@@ -69,9 +71,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  other: {
-    // JSON-LD will be injected inline in <head> below
-  },
 };
 
 const jsonLd = {
@@ -116,7 +115,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="h-full antialiased">
+    <html lang="ko" className="h-full antialiased" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -127,13 +126,33 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
         />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#6B4423" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#0F0F0F" media="(prefers-color-scheme: dark)" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="공주LIVE" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-full flex flex-col">
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <LocaleProvider>
+            {/* Skip to main content — accessibility */}
+            <a
+              href="#main"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:bg-[#6B4423] focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg focus-visible:outline-none"
+            >
+              본문 바로가기
+            </a>
+            {children}
+          </LocaleProvider>
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>
