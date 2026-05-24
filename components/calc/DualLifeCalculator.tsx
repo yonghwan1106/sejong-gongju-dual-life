@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useT } from '@/components/i18n/useT';
 import { Slider } from '@/components/ui/slider';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -25,6 +26,7 @@ const PERSONAS: Persona[] = [
 ];
 
 export default function DualLifeCalculator() {
+  const t = useT();
   const [rent, setRent] = useState(70);
   const [members, setMembers] = useState(2);
   const [useBrt, setUseBrt] = useState<'yes' | 'no'>('yes');
@@ -256,7 +258,7 @@ export default function DualLifeCalculator() {
             <Card className="border-[#E2DDD6] shadow-none bg-[#6B4423] text-white">
               <CardContent className="p-6 sm:p-8">
                 <div className="text-sm font-semibold opacity-70 mb-3 uppercase tracking-wider">
-                  1년 통장 차이
+                  {t('savingsLabel')}
                 </div>
                 <motion.div
                   key={annualTotal}

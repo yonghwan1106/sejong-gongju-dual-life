@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { useT } from '@/components/i18n/useT';
 
 const BrtCountdown = dynamic(() => import('./BrtCountdown'), { ssr: false });
 
@@ -12,6 +13,7 @@ const kpis = [
 ];
 
 export default function HeroBlock() {
+  const t = useT();
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -49,9 +51,9 @@ export default function HeroBlock() {
           className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] text-[#1F1F1F] mb-5"
           style={{ fontWeight: 900, wordBreak: 'keep-all' }}
         >
-          세종에서 일하고,
+          {t('heroHeadline1')}
           <br />
-          <span className="text-[#6B4423]">공주에서 산다</span>
+          <span className="text-[#6B4423]">{t('heroHeadline2')}</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -62,7 +64,7 @@ export default function HeroBlock() {
           className="text-lg sm:text-xl text-[#555555] mb-2 max-w-2xl"
           style={{ wordBreak: 'keep-all' }}
         >
-          2027년 1월 BRT 개통, 공주 정착 패스트트랙
+          {t('heroSubtitle')}
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -96,7 +98,7 @@ export default function HeroBlock() {
             onClick={() => scrollTo('calculator')}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#6B4423] text-white text-sm font-semibold rounded-full hover:bg-[#8A5C35] transition-colors shadow-sm"
           >
-            내 절감액 계산하기
+            {t('ctaCalculate')}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
@@ -107,7 +109,7 @@ export default function HeroBlock() {
             onClick={() => scrollTo('incentives')}
             className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-[#E2DDD6] text-[#1F1F1F] text-sm font-medium rounded-full hover:bg-[#F5F1EB] transition-colors"
           >
-            정책 살펴보기
+            {t('ctaPolicy')}
           </motion.button>
         </motion.div>
 

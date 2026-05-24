@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getCountdown, formatPad, type CountdownState } from '@/lib/countdown';
+import { useT } from '@/components/i18n/useT';
 
 function AnimatedDigit({ value, label }: { value: string; label: string }) {
   return (
@@ -28,6 +29,7 @@ function AnimatedDigit({ value, label }: { value: string; label: string }) {
 }
 
 export default function BrtCountdown() {
+  const t = useT();
   const [state, setState] = useState<CountdownState>(() => getCountdown());
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export default function BrtCountdown() {
       {/* D-day big number */}
       <div className="flex flex-col items-center leading-none pr-4 border-r border-[#E2DDD6]">
         <span className="text-[10px] font-semibold tracking-widest uppercase text-[#8A8A8A] mb-0.5">
-          BRT 개통까지
+          {t('brtCountdown')}
         </span>
         <motion.span
           key={state.days}

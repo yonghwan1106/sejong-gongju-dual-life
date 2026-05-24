@@ -7,8 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
+import { useT } from '@/components/i18n/useT';
 
 export default function InterestForm() {
+  const t = useT();
   const [form, setForm] = useState({ name: '', email: '', company: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -158,7 +160,7 @@ export default function InterestForm() {
                             </svg>
                             처리 중...
                           </span>
-                        ) : '관심 등록하기'}
+                        ) : t('interestRegister')}
                       </Button>
 
                       <p className="text-xs text-[#8A8A8A] text-center leading-relaxed">

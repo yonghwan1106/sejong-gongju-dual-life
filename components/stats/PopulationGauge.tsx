@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, animate } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
+import { useT } from '@/components/i18n/useT';
 
 const smallStats = [
   {
@@ -48,6 +49,7 @@ function CountUp({ target, duration = 1.8 }: { target: number; duration?: number
 }
 
 export default function PopulationGauge() {
+  const t = useT();
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, margin: '-80px' });
 
@@ -91,7 +93,7 @@ export default function PopulationGauge() {
               </SourceLink>
             </div>
             <p className="text-[#8A8A8A] text-sm mb-8">
-              공주시 주민등록 인구 (2026.2 기준)
+              {t('populationLabel')} (2026.2 기준)
             </p>
 
             {/* Gauge bar */}
