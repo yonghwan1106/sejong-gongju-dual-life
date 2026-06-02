@@ -29,6 +29,7 @@ export const translations = {
     roiTitle: 'ROI 21배 — 수식으로 검증',
 
     // Nav anchors
+    navVisual: '시각 근거',
     navWhy: '왜 공주인가',
     navCalculator: '비용 계산',
     navPolicy: '정책 패키지',
@@ -90,6 +91,7 @@ export const translations = {
     roiTitle: 'ROI 21× — Verified by Formula',
 
     // Nav anchors
+    navVisual: 'Visual Proof',
     navWhy: 'Why Gongju',
     navCalculator: 'Cost Calculator',
     navPolicy: 'Policy Package',

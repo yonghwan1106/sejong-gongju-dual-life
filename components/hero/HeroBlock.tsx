@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useT } from '@/components/i18n/useT';
@@ -19,15 +20,18 @@ export default function HeroBlock() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center pt-14 bg-[#FAF7F2] dark:bg-[#0F0F0F] overflow-hidden">
-      {/* Subtle background texture lines */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(0deg, #6B4423 0px, #6B4423 1px, transparent 1px, transparent 80px)',
-        }}
+    <section className="relative min-h-[92vh] flex flex-col justify-center pt-14 bg-[#20150D] overflow-hidden">
+      <Image
+        src="/images/hero-background.png"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+        aria-hidden="true"
       />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1A1008]/90 via-[#3D291A]/55 to-[#FAF7F2]/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1A1008]/45 via-transparent to-[#1A1008]/20" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
         {/* Tag */}
@@ -37,8 +41,8 @@ export default function HeroBlock() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="mb-6"
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#6B4423] bg-[#E8DDD3] px-3 py-1 rounded-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#6B4423] animate-pulse" />
+          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#F2D7B3] bg-white/10 px-3 py-1 rounded-full ring-1 ring-white/20 backdrop-blur-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#F2D7B3] animate-pulse" />
             2026 공주시 시정발전 아이디어 공모전
           </span>
         </motion.div>
@@ -48,12 +52,12 @@ export default function HeroBlock() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-          className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] text-[#1F1F1F] mb-5"
+          className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.1] text-white mb-5 drop-shadow-[0_2px_18px_rgba(0,0,0,0.35)]"
           style={{ fontWeight: 900, wordBreak: 'keep-all' }}
         >
           {t('heroHeadline1')}
           <br />
-          <span className="text-[#6B4423]">{t('heroHeadline2')}</span>
+          <span className="text-[#F2C58C]">{t('heroHeadline2')}</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -61,7 +65,7 @@ export default function HeroBlock() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-          className="text-lg sm:text-xl text-[#555555] mb-2 max-w-2xl"
+          className="text-lg sm:text-xl text-[#F5EDE3] mb-2 max-w-2xl"
           style={{ wordBreak: 'keep-all' }}
         >
           {t('heroSubtitle')}
@@ -70,7 +74,7 @@ export default function HeroBlock() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.35 }}
-          className="text-sm text-[#8A8A8A] mb-8"
+          className="text-sm text-white/65 mb-8"
         >
           2026 공주시 시정발전 아이디어 공모전 제안 — 박용환
         </motion.p>
@@ -96,7 +100,7 @@ export default function HeroBlock() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => scrollTo('calculator')}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#6B4423] text-white text-sm font-semibold rounded-full hover:bg-[#8A5C35] transition-colors shadow-sm"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#F2C58C] text-[#1F1F1F] text-sm font-semibold rounded-full hover:bg-[#F8D8A9] transition-colors shadow-sm"
           >
             {t('ctaCalculate')}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -107,7 +111,7 @@ export default function HeroBlock() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => scrollTo('policy')}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-[#E2DDD6] text-[#1F1F1F] text-sm font-medium rounded-full hover:bg-[#F5F1EB] transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-white/30 text-white text-sm font-medium rounded-full bg-white/10 hover:bg-white/20 transition-colors backdrop-blur-sm"
           >
             {t('ctaPolicy')}
           </motion.button>
@@ -118,7 +122,7 @@ export default function HeroBlock() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.65 }}
-          className="flex flex-col sm:flex-row gap-0 border border-[#E2DDD6] rounded-2xl overflow-hidden bg-white max-w-2xl"
+          className="flex flex-col sm:flex-row gap-0 border border-white/20 rounded-2xl overflow-hidden bg-white/90 backdrop-blur-sm max-w-2xl"
         >
           {kpis.map((kpi, i) => (
             <div
@@ -144,7 +148,7 @@ export default function HeroBlock() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-[#8A8A8A]"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/70"
       >
         <span className="text-xs tracking-widest uppercase">아래로</span>
         <motion.div

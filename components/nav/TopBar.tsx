@@ -7,6 +7,7 @@ import ThemeToggle from './ThemeToggle';
 import { useLocale } from '@/components/i18n/LocaleProvider';
 
 const NAV_LINKS = [
+  { labelKey: 'navVisual' as const, anchor: 'visual' },
   { labelKey: 'navWhy' as const, anchor: 'why' },
   { labelKey: 'navCalculator' as const, anchor: 'calculator' },
   { labelKey: 'navPolicy' as const, anchor: 'policy' },
@@ -44,11 +45,17 @@ export default function TopBar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
         {/* Left: logo */}
         <div className="flex items-center gap-3">
-          <span className="text-sm font-bold tracking-tight text-[#6B4423] dark:text-[#D4A574]">
+          <span className={`text-sm font-bold tracking-tight transition-colors ${
+            scrolled ? 'text-[#6B4423] dark:text-[#D4A574]' : 'text-[#F2C58C]'
+          }`}>
             {t('navTitle')}
           </span>
-          <span className="hidden sm:block text-[#E2DDD6] dark:text-[#2A2A2A]">|</span>
-          <span className="hidden sm:block text-xs text-[#8A8A8A]">
+          <span className={`hidden sm:block transition-colors ${
+            scrolled ? 'text-[#E2DDD6] dark:text-[#2A2A2A]' : 'text-white/35'
+          }`}>|</span>
+          <span className={`hidden sm:block text-xs transition-colors ${
+            scrolled ? 'text-[#8A8A8A]' : 'text-white/70'
+          }`}>
             {t('navSubtitle')}
           </span>
         </div>
@@ -64,7 +71,11 @@ export default function TopBar() {
               <button
                 key={anchor}
                 onClick={() => scrollTo(anchor)}
-                className="text-xs font-medium text-[#555555] dark:text-[#AAAAAA] px-3 py-1.5 rounded-full hover:bg-[#F5F1EB] dark:hover:bg-[#1A1A1A] hover:text-[#6B4423] dark:hover:text-[#D4A574] transition-colors focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:outline-none"
+                className={`text-xs font-medium px-3 py-1.5 rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:outline-none ${
+                  scrolled
+                    ? 'text-[#555555] dark:text-[#AAAAAA] hover:bg-[#F5F1EB] dark:hover:bg-[#1A1A1A] hover:text-[#6B4423] dark:hover:text-[#D4A574]'
+                    : 'text-white/80 hover:bg-white/10 hover:text-white'
+                }`}
               >
                 {t(labelKey)}
               </button>
@@ -73,7 +84,11 @@ export default function TopBar() {
 
           <Badge
             variant="outline"
-            className="text-[10px] border-[#E2DDD6] dark:border-[#2A2A2A] text-[#8A8A8A] hidden sm:flex"
+            className={`text-[10px] hidden sm:flex transition-colors ${
+              scrolled
+                ? 'border-[#E2DDD6] dark:border-[#2A2A2A] text-[#8A8A8A]'
+                : 'border-white/25 bg-white/10 text-white/75'
+            }`}
           >
             {t('navBadge')}
           </Badge>
@@ -94,7 +109,11 @@ export default function TopBar() {
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
             aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
-            className="md:hidden ml-1 p-1.5 rounded-lg text-[#555555] dark:text-[#AAAAAA] hover:bg-[#F5F1EB] dark:hover:bg-[#1A1A1A] transition-colors focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:outline-none"
+            className={`md:hidden ml-1 p-1.5 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:outline-none ${
+              scrolled
+                ? 'text-[#555555] dark:text-[#AAAAAA] hover:bg-[#F5F1EB] dark:hover:bg-[#1A1A1A]'
+                : 'text-white/85 hover:bg-white/10'
+            }`}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               {menuOpen ? (

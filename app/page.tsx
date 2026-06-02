@@ -1,6 +1,7 @@
 import TopBar from '@/components/nav/TopBar';
 import HeroBlock from '@/components/hero/HeroBlock';
 import EvaluationMap from '@/components/critic/EvaluationMap';
+import VisualEvidence from '@/components/visual/VisualEvidence';
 import UniquenessCompare from '@/components/diff/UniquenessCompare';
 import PopulationGauge from '@/components/stats/PopulationGauge';
 import PopulationTrend from '@/components/stats/PopulationTrend';
@@ -24,6 +25,7 @@ export default function Home() {
       <main id="main" className="flex-1">
         <HeroBlock />
         <EvaluationMap />
+        <VisualEvidence />
         <UniquenessCompare />
         <PopulationGauge />
         <PopulationTrend />

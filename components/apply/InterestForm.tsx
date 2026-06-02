@@ -17,7 +17,7 @@ export default function InterestForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState<number | null>(null);
-  const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const [errors, setErrors] = useState<{ name?: string; email?: string; submit?: string }>({});
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -26,8 +26,8 @@ export default function InterestForm() {
   useEffect(() => {
     fetch('/api/interest')
       .then((r) => r.json())
-      .then((d) => setCount(d.count))
-      .catch(() => {});
+      .then((d) => setCount(Number.isFinite(d.count) ? d.count : 0))
+      .catch(() => setCount(0));
   }, []);
 
   // Focus success message when submitted (WCAG 2.4.3)
@@ -62,18 +62,23 @@ export default function InterestForm() {
       const res = await fetch('/api/interest', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: form.name, company: form.company }),
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          company: form.company.trim(),
+        }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'registration failed');
+      }
       if (data.ok) {
-        setCount(data.count);
+        setCount(Number.isFinite(data.count) ? data.count : 0);
         track('interest_form_submitted', { has_company: !!form.company });
         setSubmitted(true);
       }
     } catch {
-      // fallback: still mark submitted on network error
-      track('interest_form_submitted', { has_company: !!form.company });
-      setSubmitted(true);
+      setErrors({ submit: '등록 처리 중 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.' });
     } finally {
       setLoading(false);
     }
@@ -119,7 +124,7 @@ export default function InterestForm() {
             </div>
 
             {/* Registration counter */}
-            {count !== null && count > 0 && (
+            {count !== null && (
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -163,7 +168,7 @@ export default function InterestForm() {
                       <p className="text-sm text-[#555] leading-relaxed mb-1">
                         감사합니다. 정책이 시행되면 가장 먼저 안내드리겠습니다.
                       </p>
-                      {count !== null && count > 0 && (
+                      {count !== null && (
                         <p className="text-sm font-semibold text-[#6B4423] mt-3">
                           현재 사전 등록 {count.toLocaleString('ko-KR')}건
                         </p>
@@ -195,7 +200,9 @@ export default function InterestForm() {
                           value={form.name}
                           onChange={(e) => {
                             setForm({ ...form, name: e.target.value });
-                            if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
+                            if (errors.name || errors.submit) {
+                              setErrors((prev) => ({ ...prev, name: undefined, submit: undefined }));
+                            }
                           }}
                           aria-describedby={errors.name ? 'name-error' : undefined}
                           aria-invalid={!!errors.name}
@@ -232,7 +239,9 @@ export default function InterestForm() {
                           value={form.email}
                           onChange={(e) => {
                             setForm({ ...form, email: e.target.value });
-                            if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
+                            if (errors.email || errors.submit) {
+                              setErrors((prev) => ({ ...prev, email: undefined, submit: undefined }));
+                            }
                           }}
                           aria-describedby={errors.email ? 'email-error' : undefined}
                           aria-invalid={!!errors.email}
@@ -264,16 +273,30 @@ export default function InterestForm() {
                           id="company"
                           placeholder="세종 소재 직장 또는 기관명"
                           value={form.company}
-                          onChange={(e) => setForm({ ...form, company: e.target.value })}
+                          onChange={(e) => {
+                            setForm({ ...form, company: e.target.value });
+                            if (errors.submit) {
+                              setErrors((prev) => ({ ...prev, submit: undefined }));
+                            }
+                          }}
                           className="border-[#E2DDD6] bg-white focus-visible:ring-[#6B4423] focus-visible:border-[#6B4423]"
                         />
                       </div>
 
                       {/* Counter below form */}
-                      {count !== null && count > 0 && (
+                      {count !== null && (
                         <p className="text-xs text-center text-[#8A8A8A]">
                           현재 사전 등록{' '}
                           <span className="font-semibold text-[#6B4423]">{count.toLocaleString('ko-KR')}건</span>
+                        </p>
+                      )}
+
+                      {errors.submit && (
+                        <p
+                          role="alert"
+                          className="text-xs text-center text-[#C8553D] leading-relaxed rounded-lg bg-[#FFF2EF] border border-[#F2C1B7] px-3 py-2"
+                        >
+                          {errors.submit}
                         </p>
                       )}
 
