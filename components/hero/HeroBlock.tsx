@@ -8,9 +8,9 @@ import { useT } from '@/components/i18n/useT';
 const BrtCountdown = dynamic(() => import('./BrtCountdown'), { ssr: false });
 
 const kpis = [
-  { value: '+1,600명', label: '3년 전입 목표' },
+  { value: '+1,600명', label: '3년 직접 전입' },
   { value: 'ROI 21배', label: '재정 투자 대비' },
-  { value: '연 2.2억', label: '시 부담 예산' },
+  { value: '연 2.2억', label: '초기 연간 시비' },
 ];
 
 export default function HeroBlock() {

@@ -17,8 +17,8 @@ const rows: KpiRow[] = [
     metric: '주민등록 인구',
     current: '99,551명',
     y1: '99,951명 (+400)',
-    y3: '102,000명 (+2,400)',
-    y5: '106,000명 (+6,400)',
+    y3: '101,151명 (+1,600)',
+    y5: '102,551명 (+3,000)',
   },
   {
     metric: '세종 재직자 공주 전입 가구',
@@ -42,10 +42,10 @@ const rows: KpiRow[] = [
     y5: '1,500건',
   },
   {
-    metric: '지역 소비 유입 (누적)',
+    metric: '지역 소비 유입 (보수 환산)',
     current: '0억',
     y1: '48억원',
-    y3: '144억원',
+    y3: '192억원',
     y5: '270억원',
   },
   {
@@ -79,12 +79,16 @@ export default function KpiTable() {
         <div className="mb-10">
           <SectionHeading
             eyebrow="KPI"
-            title={<>5년 인구 회복 시나리오{' '}<span className="text-[#6B4423]">— 7개 지표</span></>}
+            title={<>직접 전입 기준 KPI{' '}<span className="text-[#6B4423]">— 7개 지표</span></>}
             accentColor="#6B4423"
           />
-          <p className="mt-3 text-xs text-[#8A8A8A]">
+          <p className="mt-3 text-xs text-[#8A8A8A] leading-relaxed" style={{ wordBreak: 'keep-all' }}>
+            3년 목표 +1,600명은 세종 재직자 800가구 × 2인 직접 전입 기준입니다.
+            5년 확산치는 1,500가구 직접 전입 +3,000명으로 별도 표시합니다.
+            <br />
+            기준 문서:{' '}
             <SourceLink href="https://www.gongju.go.kr/" label="공주시 인구정책 제안서 vF lock 기준">
-              출처: 제안서 vF lock 기준
+              제안서 vF lock 기준
             </SourceLink>
           </p>
         </div>

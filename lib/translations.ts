@@ -38,7 +38,7 @@ export const translations = {
     roadmapTitle: '비전 2030 — 공주 인구 10만 회복 시나리오',
     roadmapPopulation: '추정 인구',
     roadmapHouseholds: '누적 전입 가구',
-    roadmapBudget: '예산 누적',
+    roadmapBudget: '직접 비용 누적',
     roadmapPhase: '단계',
 
     // BRT Map
@@ -100,7 +100,7 @@ export const translations = {
     roadmapTitle: 'Vision 2030 — Gongju Population 100K Recovery Scenario',
     roadmapPopulation: 'Est. Population',
     roadmapHouseholds: 'Cumulative Households',
-    roadmapBudget: 'Cumulative Budget',
+    roadmapBudget: 'Cumulative Direct Cost',
     roadmapPhase: 'Phase',
 
     // BRT Map

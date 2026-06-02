@@ -120,8 +120,8 @@ export default function RoiBreakdown() {
           className="flex flex-col sm:flex-row gap-4 mb-10"
         >
           {[
-            { label: '3년 기준 ROI', value: '18배', sub: '192억 ÷ 10.64억', color: '#6B4423' },
-            { label: '5년 기준 ROI', value: '21배', sub: '270억 ÷ 13억', color: '#2D5F5D' },
+            { label: '3년 직접전입 ROI', value: '18배', sub: '800가구 · 192억 ÷ 10.64억', color: '#6B4423' },
+            { label: '5년 확산 ROI', value: '21배', sub: '1,500가구 · 270억 ÷ 13억', color: '#2D5F5D' },
             {
               label: '비교: 화천 산천어축제',
               value: '40배',
@@ -194,7 +194,7 @@ export default function RoiBreakdown() {
           className="mt-6 text-xs text-[#8A8A8A] leading-relaxed"
           style={{ wordBreak: 'keep-all' }}
         >
-          * 소비 편익은 가구당 월 200만원(통계청 2인 가구 평균 소비 기준) 적용. 시 직접 비용은 이사비·BRT 정기권·정착 코디 운영비만 포함(간접 행정비 미포함). 화천 산천어축제 비교는{' '}
+          * 3년 +1,600명은 800가구 × 2인 직접 전입 기준입니다. 소비 편익은 가구당 월 200만원(통계청 2인 가구 평균 소비 기준) 적용. 시 직접 비용은 이사비·BRT 정기권·정착 코디 운영비만 포함(간접 행정비 미포함). 화천 산천어축제 비교는{' '}
           <SourceLink href="https://www.hwacheon.go.kr/" label="화천군 산천어축제 경제효과 보고서">
             화천군 공식 보고서
           </SourceLink>

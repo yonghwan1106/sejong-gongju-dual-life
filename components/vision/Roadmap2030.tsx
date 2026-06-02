@@ -29,21 +29,21 @@ const DATA: Record<Year, YearData> = {
   2026: {
     population: 99951,
     households: 200,
-    budgetBillion: 3.14,
+    budgetBillion: 2.2,
     phase: 'BRT 개통 동시 1차',
     phaseEn: 'BRT Launch — Phase 1',
     color: '#6B4423',
   },
   2027: {
-    population: 101400,
+    population: 100551,
     households: 500,
-    budgetBillion: 6.28,
+    budgetBillion: 5.2,
     phase: '확산 본격화',
     phaseEn: 'Expansion Begins',
     color: '#8A5C35',
   },
   2028: {
-    population: 103500,
+    population: 101151,
     households: 800,
     budgetBillion: 10.64,
     phase: '안정화',
@@ -51,17 +51,17 @@ const DATA: Record<Year, YearData> = {
     color: '#2D5F5D',
   },
   2029: {
-    population: 104800,
+    population: 101751,
     households: 1100,
-    budgetBillion: 13.78,
+    budgetBillion: 12,
     phase: '행안부 우수사례',
     phaseEn: 'MOIS Best Practice',
     color: '#3A7A77',
   },
   2030: {
-    population: 106500,
+    population: 102551,
     households: 1500,
-    budgetBillion: 17,
+    budgetBillion: 13,
     phase: '10만 회복 + 추가 성장',
     phaseEn: '100K Restored + Growth',
     color: '#C8553D',
@@ -151,9 +151,13 @@ export default function Roadmap2030() {
         <div className="mb-12">
           <SectionHeading
             eyebrow="비전 2030"
-            title={<>비전 2030 —{' '}<span className="text-[#C8553D]">공주 인구 10만 회복 시나리오</span></>}
+            title={<>비전 2030 —{' '}<span className="text-[#C8553D]">직접 전입 확산 시나리오</span></>}
             accentColor="#C8553D"
           />
+          <p className="mt-3 text-xs text-[#8A8A8A] leading-relaxed" style={{ wordBreak: 'keep-all' }}>
+            주민등록 인구 증가는 세종 재직자 직접 전입 가구 × 2인 기준입니다.
+            아래의 정책 미적용 비교값은 인구 자연감소를 감안한 격차로, 직접 전입 목표와 구분해 표시합니다.
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-[300px_1fr] gap-8 items-start">
@@ -271,7 +275,7 @@ export default function Roadmap2030() {
               {/* Budget */}
               <div className="p-5 rounded-2xl border border-[#E2DDD6] dark:border-[#2A2A2A] bg-[#FAF7F2] dark:bg-[#1A1A1A]">
                 <div className="text-xs font-semibold tracking-widest uppercase text-[#8A8A8A] mb-2">
-                  예산 누적
+                  직접 비용 누적
                 </div>
                 <div className="text-2xl font-black text-[#6B4423] dark:text-[#D4A574]" style={{ fontWeight: 900 }}>
                   <SourceLink href="https://www.gongju.go.kr/" label="공주시 인구정책 제안서 vF 재정분석">
@@ -286,7 +290,7 @@ export default function Roadmap2030() {
             <div className="pt-2">
               <div className="flex justify-between text-[11px] text-[#8A8A8A] mb-2">
                 <span>2025</span>
-                <span className="font-semibold text-[#C8553D]">목표 2030: 10만 돌파</span>
+                <span className="font-semibold text-[#C8553D]">목표 2030: 직접전입 +3,000명</span>
               </div>
               <div className="relative h-2 bg-[#F5F1EB] dark:bg-[#2A2A2A] rounded-full overflow-hidden">
                 {YEARS.map((year, i) => {
