@@ -3,7 +3,11 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-export default function ThemeToggle() {
+interface ThemeToggleProps {
+  onHero?: boolean;
+}
+
+export default function ThemeToggle({ onHero = false }: ThemeToggleProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -13,7 +17,9 @@ export default function ThemeToggle() {
     return (
       <button
         aria-label="테마 전환"
-        className="w-8 h-8 flex items-center justify-center rounded-full border border-[#E2DDD6] text-[#8A8A8A] focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:ring-offset-2 focus-visible:outline-none"
+        className={`w-8 h-8 flex items-center justify-center rounded-full border transition-colors focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:ring-offset-2 focus-visible:outline-none ${
+          onHero ? 'border-white/55 bg-black/20 text-white/90 backdrop-blur-sm' : 'border-[#E2DDD6] text-[#8A8A8A]'
+        }`}
       >
         <span className="sr-only">테마 전환</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -30,7 +36,11 @@ export default function ThemeToggle() {
     <button
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
       aria-label={isDark ? '라이트 모드로 전환' : '다크 모드로 전환'}
-      className="w-8 h-8 flex items-center justify-center rounded-full border border-[#E2DDD6] dark:border-[#2A2A2A] text-[#8A8A8A] dark:text-[#A0A0A0] hover:text-[#1F1F1F] dark:hover:text-[#F0F0F0] hover:bg-[#F5F1EB] dark:hover:bg-[#1A1A1A] transition-colors focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:ring-offset-2 focus-visible:outline-none"
+      className={`w-8 h-8 flex items-center justify-center rounded-full border transition-colors focus-visible:ring-2 focus-visible:ring-[#6B4423]/50 focus-visible:ring-offset-2 focus-visible:outline-none ${
+        onHero
+          ? 'border-white/55 bg-black/20 text-white/90 hover:bg-white/15 hover:text-white backdrop-blur-sm'
+          : 'border-[#E2DDD6] dark:border-[#2A2A2A] text-[#8A8A8A] dark:text-[#A0A0A0] hover:text-[#1F1F1F] dark:hover:text-[#F0F0F0] hover:bg-[#F5F1EB] dark:hover:bg-[#1A1A1A]'
+      }`}
     >
       {isDark ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

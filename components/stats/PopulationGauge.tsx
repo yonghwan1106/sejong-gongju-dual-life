@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, animate } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import SourceLink from '@/components/ui/SourceLink';
 import { useT } from '@/components/i18n/useT';
 
@@ -26,24 +26,14 @@ const smallStats = [
   },
 ];
 
-function CountUp({ target, duration = 1.8 }: { target: number; duration?: number }) {
-  const [display, setDisplay] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
-
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(0, target, {
-      duration,
-      ease: 'easeOut',
-      onUpdate: (v) => setDisplay(Math.round(v)),
-    });
-    return () => controls.stop();
-  }, [inView, target, duration]);
-
+function CountUp({
+  target,
+}: {
+  target: number;
+}) {
   return (
-    <span ref={ref} className="tabular-nums">
-      {display.toLocaleString('ko-KR')}
+    <span className="tabular-nums">
+      {target.toLocaleString('ko-KR')}
     </span>
   );
 }
@@ -88,6 +78,7 @@ export default function PopulationGauge() {
               <SourceLink
                 href="https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1B040A3"
                 label="KOSIS 주민등록인구현황 2026.2"
+                sourcePlacement="below"
               >
                 <CountUp target={current} />
               </SourceLink>
@@ -144,7 +135,7 @@ export default function PopulationGauge() {
                   className="text-3xl font-black text-[#6B4423] tabular-nums min-w-[80px]"
                   style={{ fontWeight: 900 }}
                 >
-                  <SourceLink href={s.href} label={s.source}>
+                  <SourceLink href={s.href} label={s.source} sourcePlacement="below">
                     {s.value}
                   </SourceLink>
                 </div>

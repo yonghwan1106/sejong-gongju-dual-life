@@ -93,8 +93,8 @@ export default function TopBar() {
             {t('navBadge')}
           </Badge>
 
-          <LangToggle />
-          <ThemeToggle />
+          <LangToggle onHero={!scrolled} />
+          <ThemeToggle onHero={!scrolled} />
 
           {/* Apply CTA */}
           <a

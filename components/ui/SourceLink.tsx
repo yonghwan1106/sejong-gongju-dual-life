@@ -6,6 +6,7 @@ interface SourceLinkProps {
   href: string;
   label: string;
   children: React.ReactNode;
+  sourcePlacement?: 'inline' | 'below';
 }
 
 /**
@@ -15,12 +16,18 @@ interface SourceLinkProps {
  * Usage:
  *   <SourceLink href="https://kosis.kr/..." label="KOSIS 2026.2">99,551</SourceLink>
  */
-export default function SourceLink({ href, label, children }: SourceLinkProps) {
+export default function SourceLink({
+  href,
+  label,
+  children,
+  sourcePlacement = 'inline',
+}: SourceLinkProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
+  const sourceBelow = sourcePlacement === 'below';
 
   return (
-    <span className="relative inline-flex items-baseline gap-0">
+    <span className={sourceBelow ? 'relative inline-flex flex-col items-start gap-1' : 'relative inline-flex items-baseline gap-0'}>
       {children}
       <a
         href={href}
@@ -33,13 +40,17 @@ export default function SourceLink({ href, label, children }: SourceLinkProps) {
         onBlur={() => setOpen(false)}
         className="inline-block focus:outline-none"
       >
-        <sup
+        <span
           ref={ref}
-          className="ml-0.5 text-[0.6em] leading-none opacity-50 hover:opacity-80 transition-opacity cursor-pointer select-none text-[#6B4423]"
-          style={{ fontSize: '0.6em', verticalAlign: 'super' }}
+          className={
+            sourceBelow
+              ? 'block text-xs font-bold leading-none opacity-45 hover:opacity-80 transition-opacity cursor-pointer select-none text-[#6B4423]'
+              : 'ml-0.5 text-[0.6em] leading-none opacity-50 hover:opacity-80 transition-opacity cursor-pointer select-none text-[#6B4423]'
+          }
+          style={sourceBelow ? undefined : { fontSize: '0.6em', verticalAlign: 'super' }}
         >
           출처
-        </sup>
+        </span>
       </a>
 
       {/* Tooltip */}

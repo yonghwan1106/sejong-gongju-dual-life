@@ -132,8 +132,8 @@ export default function HeroBlock() {
               }`}
             >
               <div
-                className="text-2xl sm:text-3xl font-black text-[#6B4423] tabular-nums mb-1"
-                style={{ fontWeight: 900 }}
+                className="text-2xl sm:text-3xl font-black text-[#6B4423] tabular-nums mb-1 whitespace-nowrap"
+                style={{ fontWeight: 900, wordBreak: 'keep-all' }}
               >
                 {kpi.value}
               </div>
